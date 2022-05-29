@@ -1,32 +1,59 @@
+import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
-import { Box, Flex, Image,Link } from '@chakra-ui/react';
-export function Slider(){
-    const slides = [];
 
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
+import { Flex } from '@chakra-ui/react';
+import { SliderItem } from './SliderItem';
 
-    return(
-        <Flex mt="52px" mb="52px"  alignItems="center" justifyContent="center">
-            <Box w={['100%','100%',1240]}>
-                <Swiper 
-                    modules={[Navigation, Pagination, Scrollbar, A11y]}
-                    pagination={{ clickable: true }}
-                    navigation
-                    scrollbar={{ draggable: true }}
-                >
-                    <SwiperSlide><Link href="./continent"><Image src='./assets/slide/img1.jpg'    h={['375px','375px','450px']} w={['100%','100%','1240px']} /></Link></SwiperSlide>
-                    <SwiperSlide><Image src='./assets/slide/img2.jpg'    h={['375px','375px','450px']} w={['100%','100%','1240px']} /></SwiperSlide>
-                    <SwiperSlide><Image src='./assets/slide/img3.jpg'    h={['375px','375px','450px']} w={['100%','100%','1240px']} /></SwiperSlide>
-                    <SwiperSlide><Image src='./assets/slide/img4.jpg'    h={['375px','375px','450px']} w={['100%','100%','1240px']} /></SwiperSlide>
-                </Swiper>
-            </Box>
-            
-     
+interface Continent {
+    id: number;
+    name: string;
+    description: string;
+    carrouselImage: string;
+}
+interface SliderProps {
+    continents: Continent[];
+}
+
+export function Slider({ continents }: SliderProps) {
+
+    return (
+    <Flex w="100vw"
+    justifyContent="center"
+    alignItems="center"
+    >
+        <Flex
+        maxW="1240px"
+        w={["100%","100%","1240px"]}
+        justifyContent="center"
+        alignItems="center"
+        mb="8"
+        >
+           <Swiper
+            slidesPerView={1}
+            spaceBetween={30}
+            loop={true}
+            pagination={{
+            clickable: true,
+            }}
+            navigation={true}
+            modules={[Pagination, Navigation]}
+            className="mySwiper"
+            >
+                {continents.map(continent => ( 
+                <SwiperSlide key={`slide-${continent.id}`}>
+                    <SliderItem 
+                    id={continent.id}
+                    name={continent.name}
+                    image={continent.carrouselImage}
+                    description={continent.description}
+                    />
+                </SwiperSlide> ))}
+            </Swiper>
         </Flex>
+    </Flex>
     )
 }

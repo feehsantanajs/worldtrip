@@ -1,7 +1,13 @@
 import {  Flex, Text, Tooltip, VStack } from "@chakra-ui/react";
-import { ItemInfo } from "./ItemInfo/ItemInfo";
+
 import { InfoOutlineIcon} from '@chakra-ui/icons'
-export function Info(){
+import { ItemInfo } from "./ItemInfo";
+interface InfoProps{
+    text:string;
+    numberOfCountries:number;
+    numberOfLanguages:number;
+}
+export function Info({text,numberOfCountries,numberOfLanguages}:InfoProps){
     return(
         <Flex
         mt="80px"
@@ -11,17 +17,12 @@ export function Info(){
         >
              <Flex justify="center" alignItems="center" w={600}>
                 <Text fontSize={24} color="dark.300">
-                A Europa é, por convenção, um dos seis 
-                continentes do mundo. Compreendendo a 
-                península ocidental da Eurásia, a Europa 
-                geralmente divide-se da Ásia a leste pela 
-                divisória de águas dos montes Urais, o rio Ural, o 
-                mar Cáspio, o Cáucaso, e o mar Negro a sudeste
+                {text}
                 </Text>
             </Flex>
             <Flex w={["100%","100%","490px"]} mt={['30px','30px','0']}justify={["space-between","space-between","space-around"]}  align={["left","left","center"]}>
-                <ItemInfo type="países" number={50}/>
-                <ItemInfo type="línguas" number={60}/>
+                <ItemInfo type="países" number={numberOfCountries}/>
+                <ItemInfo type="línguas" number={numberOfLanguages}/>
                 <Flex width="186px" justify="space-between">                    
                         <ItemInfo type="cidades +100" number={27}/> 
                         <Flex position="relative" top="85px" >                                     

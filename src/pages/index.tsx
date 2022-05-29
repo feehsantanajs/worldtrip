@@ -1,12 +1,17 @@
 import { Box, Flex, HStack, Text, VStack } from '@chakra-ui/react'
 import type { NextPage } from 'next'
+import { useState } from 'react'
 import { Banner } from '../components/Banner/Banner'
 import { Header } from '../components/Header/Header'
 import { Slider } from '../components/Slider'
 import { TravelTypes } from '../components/TravelTypes/TravelTypes'
+import db from '../../db.json';
 
 
 const Home: NextPage = () => {
+
+  const { continents } = db;
+
   return (
     <Flex 
     w="100vw" 
@@ -16,8 +21,6 @@ const Home: NextPage = () => {
       <Header />
       <Banner />
       <TravelTypes />
-
-        
       <Flex       
       as={Box}    
       w={['100%','100%', '839px']}
@@ -39,9 +42,11 @@ const Home: NextPage = () => {
           <Text>Então escolha seu continente</Text>
         </VStack >
       </Flex>
-      <Slider />
+      <Slider continents={continents} />
     
-    </Flex>  
+    </Flex> 
+    
+   
   )
 }
 export default Home

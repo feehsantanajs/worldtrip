@@ -1,6 +1,10 @@
-import { Flex, Image } from "@chakra-ui/react";
+import { Flex, Icon, Image, Link } from "@chakra-ui/react";
+import { useRouter } from "next/router";
+import { RiArrowDropLeftLine } from 'react-icons/ri';
+import { Logo } from "./Logo";
 
 export function Header(){
+    const { asPath } = useRouter();
     return(
       
         <Flex
@@ -10,9 +14,21 @@ export function Header(){
         justify="center"
         align="center"
         >
-        
-            <Image src="./assets/Logo.svg" alt='Worldtrip'  />
-        
+            {asPath !== "/" &&
+                <Link href="/">
+                    <Icon
+                    as={RiArrowDropLeftLine}
+                    fontSize={["25px", "36px"]}
+                    color="gray.500"
+                    position="absolute"
+                    top={["15px", "30px"]}
+                    left="20px"
+                    cursor="pointer"
+                    />
+                     <Logo />
+              </Link>
+            }
+           
         </Flex>
          
     );
